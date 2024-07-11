@@ -1,0 +1,2 @@
+We have to run the docker rum in interactive mode with flag -i
+docker run --rm -i --name assg_part2 part:2
