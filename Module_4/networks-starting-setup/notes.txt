@@ -1,0 +1,13 @@
+Docker can communicate over www freely
+For localhost communication put host.docker.internal instead of localhost
+For cross container communication we can create a network and then use container name instead of localhost as required
+
+# Creating a network with name fav-net
+docker network create fav-net
+
+# Running the mongo image to create a container inside our network by providing a flag --network
+docker run -d --rm --network fav-net --name mongodb mong
+
+#  Building and Running our docker image to create a container inside our network by providing a flag --network
+docker build -t fav-node .   
+docker run -d -p 3000:3000 --name fav-app --network fav-net --rm fav-node                               
