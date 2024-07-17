@@ -1,0 +1,9 @@
+
+
+docker run --name mongodb -d -v goaldata:/data/db --rm --network goal-net -e MONGO_INITDB_ROOT_USERNAME=dev -e MONGO_INITDB_ROOT_PASSWORD=password mongo
+
+docker run --name backend --network goal-net -d -p 80:80 --rm -v /Users/devashish.khairnar/Documents/Learning/Docker_and_Kubernetes/Module_5/goal_tracking_app/backend:/app
+ -v logs:/app/logs -v /app/node_modules -e USERNAME=dev -e PASSWORD=password node_back
+
+ docker run --rm -it -p 3000:3000 --name frontend --network goal-net 
+ -v /Users/devashish.khairnar/Documents/Learning/Docker_and_Kubernetes/Module_5/goal_tracking_app/frontend/src:/app/src node_front
