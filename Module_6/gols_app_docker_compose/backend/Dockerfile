@@ -6,8 +6,11 @@ COPY package.json .
 
 RUN npm install
 
-COPY . . 
+COPY . .
 
-EXPOSE 3000
+EXPOSE 80
+
+ENV MONGODB_USERNAME=dev
+ENV MONGODB_PASSWORD=password
 
 CMD ["npm", "start"]

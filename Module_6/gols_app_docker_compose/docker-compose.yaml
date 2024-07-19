@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: "mongo"
+    volumes:
+      - data:/data/db
+    # environment:
+      # 1 way of adding env var
+      # MONGO_INITDB_ROOT_USERNAME: dev
+      # MONGO_INITDB_ROOT_PASSWORD: password
+
+      # 2nd way of adding env var
+      # - MONGO_INITDB_ROOT_USERNAME=dev
+      # - MONGO_INITDB_ROOT_PASSWORD=password
+    env_file:
+      - ./env/mongo.env
+    container_name: mongodb
+
+  backend:
+    build: ./backend
+    # build: (Longer form way)
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    #   args:
+    #   some-arg: value
+    ports:
+      - '80:80'
+    volumes:
+      - logs:/app/logs
+      - ./backend:/app
+      - /app/node_modules
+    env_file:
+      - ./backend/env/backend.env
+    depends_on:
+      - mongodb
+  
+  frontend:
+    build: ./frontend
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - ./frontend/src:/app/src
+    stdin_open: true
+    tty: true
+    depends_on: 
+      - backend
+
+volumes:
+  data:
+  logs:
