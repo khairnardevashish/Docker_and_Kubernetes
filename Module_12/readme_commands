@@ -1,0 +1,27 @@
+create docker image and push it to docker hub
+    docker build -t kub-first-app . 
+    docker image tag kub-first-app khairnardev/kub-first-app (renaming)
+    docker push khairnardev/kub-first-app     
+
+
+- to check the cluster status
+    minikube status
+- to start the cluster    
+    minikube start
+
+
+create a deployment in (precondition-> cluster should be up and running)
+    kubectl create deployment first-app --image=khairnardev/kub-first-app
+
+- to check if deployment is successful or not
+    kubectl get deployment
+    kubectl get pod
+
+Expose (create a service) so that we can access the application from localhost/outside of cluster
+    kubectl expose deployment first-app --type=LoadBalancer --port=8080
+
+- check service is created or not 
+     kubectl get services
+
+Run/check whether app is running or not
+    minikube service first-app
