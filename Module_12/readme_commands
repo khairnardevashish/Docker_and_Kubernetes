@@ -1,3 +1,5 @@
+** INTERATIVE DEPLOYMENT APPROACH **
+
 create docker image and push it to docker hub
     docker build -t kub-first-app . 
     docker image tag kub-first-app khairnardev/kub-first-app (renaming)
@@ -25,3 +27,15 @@ Expose (create a service) so that we can access the application from localhost/o
 
 Run/check whether app is running or not
     minikube service first-app
+
+To create multiple replicas of a container pod
+    kubectl scale deployment/first-app --replicas=3
+
+To undo/rollback the latest deployment (when deployment fail it goes into a loop as old pod won't be shut down becuase new pod couldn't start coz of error)
+    kubectl rollout undo deployment/first-app
+
+To check the rollout history
+    kubectl rollout history deployment/fist-app
+
+To check more details about a particular rollout from history result
+    kubectl rollout history deployment/first-app --revision=3
