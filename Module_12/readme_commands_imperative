@@ -1,4 +1,4 @@
-** INTERATIVE DEPLOYMENT APPROACH **
+** IMPERATIVE DEPLOYMENT APPROACH **
 
 create docker image and push it to docker hub
     docker build -t kub-first-app . 
@@ -39,3 +39,7 @@ To check the rollout history
 
 To check more details about a particular rollout from history result
     kubectl rollout history deployment/first-app --revision=3
+
+To delete service and deployment
+    kubectl delete service first-app
+    kubectl delete deployment first-app
